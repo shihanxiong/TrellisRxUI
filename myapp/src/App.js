@@ -17,7 +17,8 @@ class App extends Component {
     this.state = {
       projects: [],
       todos: [],
-      patients: []
+      patients: [],
+      currentPatient: {}
     }
   }
 
@@ -113,7 +114,7 @@ class App extends Component {
         <Patients patients={this.state.patients} />
         <hr/>
         <strong>Patient details</strong>
-        <PatientDetails />
+        <PatientDetails currentPatient={this.state.currentPatient} />
         <hr/>
         <AddProject addProject={this.handleAddProject.bind(this)}/>
         <Projects projects={this.state.projects} onDelete={this.handleDeleteProject.bind(this)} />

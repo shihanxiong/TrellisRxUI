@@ -4,7 +4,10 @@ class PatientItem extends Component {
     render() {
         return (
             <li className="Patient">
-                <strong>{this.props.patient.lastName} {this.props.patient.firstName}</strong>, {this.props.patient.town}
+                name: <strong>{this.props.patient.firstName} {this.props.patient.lastName}</strong>, 
+                town: {this.props.patient.town}, 
+                last pulse: <strong>{this.props.patient.pulse}</strong>, 
+                last temperature: <strong>{this.props.patient.temperature}</strong>
             </li>
         );
     }

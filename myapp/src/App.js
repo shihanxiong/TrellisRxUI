@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import uuid from 'uuid';
 import $ from 'jquery';
 import logo from './logo.svg';
+import nodejslogo from './nodejslogo.svg';
+import mongodblogo from './mongodblogo.svg';
 import './App.css';
 import Projects from './Components/Projects';
 import AddProject from './Components/AddProject';
@@ -101,11 +103,15 @@ class App extends Component {
         {/* Default layout */}
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
+          <img src={nodejslogo} alt="logo" /> <strong>+</strong>
+          <img src={mongodblogo} alt="logo" />
           <h2>Coding Exercise (React + Nodejs + MongoDB)</h2>
         </div>
 
         {/* Application */}
         <Patients patients={this.state.patients} />
+        <hr/>
+        Placeholder for patient details
         <hr/>
         <AddProject addProject={this.handleAddProject.bind(this)}/>
         <Projects projects={this.state.projects} onDelete={this.handleDeleteProject.bind(this)} />

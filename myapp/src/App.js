@@ -31,6 +31,12 @@ class App extends Component {
     });
   }
 
+  handleAddProject(project) {
+    let projects = this.state.projects;
+    projects.push(project);
+    this.setState({projects:projects});
+  }
+
   render() {
     return (
       <div className="App">
@@ -39,11 +45,9 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h2>Welcome to React</h2>
         </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
 
         {/* Application */}
+        <AddProject addProject={this.handleAddProject.bind(this)}/>
         <Projects projects={this.state.projects} />
       </div>
     );

@@ -8,6 +8,8 @@ class PatientItem extends Component {
                 town: {this.props.patient.town}, 
                 last pulse: <strong>{this.props.patient.pulse}</strong>, 
                 last temperature: <strong>{this.props.patient.temperature}</strong>
+                <span>  </span>
+                <input type="button" value="Show Medications" />
             </li>
         );
     }

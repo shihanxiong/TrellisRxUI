@@ -9,6 +9,7 @@ import Projects from './Components/Projects';
 import AddProject from './Components/AddProject';
 import Todos from './Components/Todos';
 import Patients from './Components/Patients';
+import PatientDetails from './Components/PatientDetails';
 
 class App extends Component {
   constructor() {
@@ -100,7 +101,7 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        {/* Default layout */}
+        {/* Layout */}
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <img src={nodejslogo} alt="logo" /> <strong>+</strong>
@@ -111,7 +112,8 @@ class App extends Component {
         {/* Application */}
         <Patients patients={this.state.patients} />
         <hr/>
-        Placeholder for patient details
+        <strong>Patient details</strong>
+        <PatientDetails />
         <hr/>
         <AddProject addProject={this.handleAddProject.bind(this)}/>
         <Projects projects={this.state.projects} onDelete={this.handleDeleteProject.bind(this)} />

@@ -105,7 +105,7 @@ class App extends Component {
         </div>
 
         {/* Application */}
-        
+        <Patients patients={this.state.patients} />
         <hr/>
         <AddProject addProject={this.handleAddProject.bind(this)}/>
         <Projects projects={this.state.projects} onDelete={this.handleDeleteProject.bind(this)} />

@@ -6,14 +6,32 @@ import './App.css';
 import Projects from './Components/Projects';
 import AddProject from './Components/AddProject';
 import Todos from './Components/Todos';
+import Patients from './Components/Patients';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       projects: [],
-      todos: []
+      todos: [],
+      patients: []
     }
+  }
+
+  getPatients() {
+    $.ajax({
+      url: 'http://localhost:3333/patients/showall',
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        this.setState({patients: data}, function(){
+          console.log(this.state);
+        });
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.log(err);
+      }
+    });
   }
 
   getTodos() {
@@ -57,6 +75,7 @@ class App extends Component {
   componentWillMount() {
     this.getProjects();
     this.getTodos();
+    this.getPatients();
   }
 
   componentDidMount() {
@@ -82,10 +101,12 @@ class App extends Component {
         {/* Default layout */}
         <div className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
+          <h2>Coding Exercise (React + Nodejs + MongoDB)</h2>
         </div>
 
         {/* Application */}
+        
+        <hr/>
         <AddProject addProject={this.handleAddProject.bind(this)}/>
         <Projects projects={this.state.projects} onDelete={this.handleDeleteProject.bind(this)} />
         <hr/>

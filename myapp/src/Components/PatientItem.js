@@ -1,19 +1,79 @@
 import React, { Component } from 'react';
+import Dispatcher from '../Dispatcher';
+import $ from 'jquery';
 
 class PatientItem extends Component {
-    handleClick(id){
-        console.log("selected patient id = " + id);
+    constructor() {
+        super();
+        this.state = {
+            newVitals: {}
+        }
+    }
+
+    handleClick(patient){
+        console.log("selected patient is " + patient);
+        Dispatcher.dispatch({
+            type: "UPDATE_CURRENT_PATIENT",
+            object: patient
+        });
+    }
+
+    handleSubmit(e) {
+        if (this.refs.pulse.value === '') {
+            alert('Pulse is required.');
+        } else if (this.refs.temperature.value === '') {
+            alert('Temperature is required.');
+        } else {
+            console.log("Prepare to save vitals.");
+
+            let newVitals = {
+                id: this.props.patient._id,
+                pulse: this.refs.pulse.value * 1,
+                temperature: this.refs.temperature.value * 1
+            };
+
+            console.log(newVitals);
+
+            $.ajax({
+                url: 'http://localhost:3333/patients/updatevitals',
+                contentType: "application/json",
+                dataType: 'json',
+                type: "POST",
+                data: JSON.stringify(newVitals),
+                success: function(data, status, xhr) {
+                    console.log('Data saved successfully.');
+                }.bind(this),
+                complete: function(data) {
+                    alert('Data saved successfully.');
+                },
+                error: function(err) {
+                    console.log(err);
+                }
+            });
+
+            this.setState({newVitals: newVitals});
+            e.preventDefault();
+        }
     }
 
     render() {
         return (
             <li className="Patient">
-                name: <strong>{this.props.patient.firstName} {this.props.patient.lastName}</strong>, 
-                town: {this.props.patient.town}, 
-                last pulse: <strong>{this.props.patient.pulse}</strong>, 
-                last temperature: <strong>{this.props.patient.temperature}</strong>
+                Name: <strong>{this.props.patient.firstName} {this.props.patient.lastName}</strong>, 
+                Town: {this.props.patient.town}, 
+                Last pulse: <strong>{this.props.patient.pulse}</strong>, 
+                Last temperature: <strong>{this.props.patient.temperature}</strong>
                 <span>   </span>
-                <input type="button" value="Show Medications" onClick={this.handleClick.bind(this, this.props.patient._id)} />
+                <input type="button" value="Show Medications" onClick={this.handleClick.bind(this, this.props.patient)} />
+                <form onSubmit={this.handleSubmit.bind(this)}>
+                    <div>
+                        <label>Enter Pulse</label>
+                        <input type="number" ref="pulse" />
+                        <label>Enter Temperature</label>
+                        <input type="number" ref="temperature" />
+                        <input type="submit" value="submit" />
+                    </div>
+                </form>
             </li>
         );
     }

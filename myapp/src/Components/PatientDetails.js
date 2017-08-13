@@ -1,11 +1,29 @@
 import React, { Component } from 'react';
+import PatientDetailsStore from '../Stores/PatientDetailsStore';
 
 class PatientDetails extends Component {
+    constructor() {
+        super();
+        this.getCurrentPatient = this.getCurrentPatient.bind(this);
+        this.state = {
+            currentPatient: PatientDetailsStore.getCurrentPatient()
+        };
+    }
+
+    componentWillMount() {
+        PatientDetailsStore.on("change", this.getCurrentPatient);
+    }
+
+    getCurrentPatient() {
+        this.setState({
+            currentPatient: PatientDetailsStore.getCurrentPatient()
+        });
+    }
+
     render() {
         return (
             <div className="PatientDetails">
-                This is the place holder for patient details.
-                {this.props.patient}
+                {this.state.currentPatient.firstName} {this.state.currentPatient.lastName}
             </div>
         );
     }
@@ -13,7 +31,7 @@ class PatientDetails extends Component {
 
 // Validation prop types
 PatientDetails.propTypes = {
-    patientDetails: React.PropTypes.object,
+    patientDetails: React.PropTypes.object
 }
 
 export default PatientDetails;

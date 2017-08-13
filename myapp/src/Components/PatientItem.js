@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import PatientDetails from './PatientDetails';
 
 class PatientItem extends Component {
     handleClick(id){
@@ -13,7 +12,7 @@ class PatientItem extends Component {
                 town: {this.props.patient.town}, 
                 last pulse: <strong>{this.props.patient.pulse}</strong>, 
                 last temperature: <strong>{this.props.patient.temperature}</strong>
-                <span>  </span>
+                <span>   </span>
                 <input type="button" value="Show Medications" onClick={this.handleClick.bind(this, this.props.patient._id)} />
             </li>
         );

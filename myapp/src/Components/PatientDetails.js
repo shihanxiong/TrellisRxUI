@@ -5,6 +5,7 @@ class PatientDetails extends Component {
         return (
             <div className="PatientDetails">
                 This is the place holder for patient details.
+                {this.props.patient}
             </div>
         );
     }

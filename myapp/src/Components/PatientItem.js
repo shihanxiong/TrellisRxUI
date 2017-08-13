@@ -11,10 +11,10 @@ class PatientItem extends Component {
     }
 
     handleClick(patient){
-        console.log("selected patient is " + patient);
+        console.log("selected patient is " + patient._id);
         Dispatcher.dispatch({
             type: "UPDATE_CURRENT_PATIENT",
-            object: patient
+            object: patient._id
         });
     }
 
@@ -44,7 +44,7 @@ class PatientItem extends Component {
                     console.log('Data saved successfully.');
                 }.bind(this),
                 complete: function(data) {
-                    alert('Data saved successfully.');
+                    alert('Data saved successfully. Please refresh the page to see the latest data.');
                 },
                 error: function(err) {
                     console.log(err);

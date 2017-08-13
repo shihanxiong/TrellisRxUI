@@ -27,3 +27,4 @@ Patients.propTypes = {
 }
 
 export default Patients;
+ 

@@ -5,14 +5,14 @@ import nodejslogo from './nodejslogo.svg';
 import mongodblogo from './mongodblogo.svg';
 import './App.css';
 import Patients from './Components/Patients';
-import PatientDetails from './Components/PatientDetails';
+import Medicines from './Components/Medicines';
 
 class App extends Component {
   constructor() {
     super();
     this.state = {
       patients: [],
-      currentPatient: {}
+      medicines: []
     }
   }
 
@@ -32,8 +32,25 @@ class App extends Component {
     });
   }
 
+  getMedicines(id) {
+    $.ajax({
+      url: 'http://localhost:3333/patients/' + id + '/meds',
+      dataType: 'json',
+      cache: false,
+      success: function(data) {
+        this.setState({medicines: data}, function(){
+          console.log(this.state);
+        });
+      }.bind(this),
+      error: function(xhr, status, err) {
+        console.log(err);
+      }
+    });
+  }
+
   componentWillMount() {
     this.getPatients();
+    // this.getMedicines();
   }
 
   componentDidMount() {
@@ -54,8 +71,7 @@ class App extends Component {
         {/* Application */}
         <Patients patients={this.state.patients} />
         <hr/>
-        <strong>Patient details</strong>
-        <PatientDetails currentPatient={this.state.currentPatient} />
+        <Medicines medicines={this.state.medicines} />
         <hr/>
       </div>
     );

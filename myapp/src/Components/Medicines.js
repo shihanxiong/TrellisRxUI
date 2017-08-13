@@ -1,11 +1,19 @@
 import React, { Component } from 'react';
 import MedicineItem from './MedicineItem';
+import MedicinesStore from '../Stores/MedicinesStore';
 
 class Medicines extends Component {
+    constructor() {
+        super();
+        this.state =  {
+            medicines: MedicinesStore.getAllMedicines(),
+        };
+    }
+
     render() {
         let medicineItems;
-        if (this.props.medicines) {
-            medicineItems = this.props.medicines.map(medicine => {
+        if (this.state.medicines) {
+            medicineItems = this.state.medicines.map(medicine => {
                 return (
                     <MedicineItem key = {medicine.medname} medicine = {medicine} />
                 );
@@ -14,7 +22,7 @@ class Medicines extends Component {
 
         return (
             <div className="Medicines">
-                <h3>List of meds</h3>
+                <h4>Meds List</h4>
                 {medicineItems}
             </div>
         );

@@ -14,7 +14,7 @@ class PatientItem extends Component {
         console.log("selected patient is " + patient._id);
         Dispatcher.dispatch({
             type: "UPDATE_CURRENT_PATIENT",
-            object: patient._id
+            id: patient._id
         });
     }
 

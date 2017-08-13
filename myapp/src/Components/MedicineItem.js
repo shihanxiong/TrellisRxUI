@@ -9,7 +9,10 @@ class MedicineItem extends Component {
     }
 
     render() {
-        let startDate = new Date(this.props.medicine.startDate).toDateString();
+        let startDate;
+        if (this.props.medicine.startDate) {
+            let startDate = new Date(this.props.medicine.startDate).toDateString();
+        }
         let stopDate;
         if (this.props.medicine.stopDate) {
             stopDate = new Date(this.props.medicine.stopDate).toDateString();

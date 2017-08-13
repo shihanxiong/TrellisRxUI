@@ -35,6 +35,7 @@ class App extends Component {
   getMedicines(id) {
     $.ajax({
       url: 'http://localhost:3333/patients/' + id + '/meds',
+      // url: 'http://localhost:3333/patients/598d2df6de25cc3394d8ab30/meds',
       dataType: 'json',
       cache: false,
       success: function(data) {
@@ -71,7 +72,8 @@ class App extends Component {
         {/* Application */}
         <Patients patients={this.state.patients} />
         <hr/>
-        <Medicines medicines={this.state.medicines} />
+        {/* <Medicines medicines={this.state.medicines} /> */}
+        <Medicines />
         <hr/>
       </div>
     );

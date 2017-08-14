@@ -5,6 +5,7 @@ import $ from 'jquery';
 class PatientItem extends Component {
     constructor() {
         super();
+        this.handleClick = this.handleClick.bind(this);
         this.state = {
             newVitals: {}
         }

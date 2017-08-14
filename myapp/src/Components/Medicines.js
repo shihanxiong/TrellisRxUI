@@ -10,6 +10,14 @@ class Medicines extends Component {
         };
     }
 
+    componentWillMount() {
+        MedicinesStore.on("change", () => {
+            this.setState({
+                medicines: MedicinesStore.getAllMedicines()
+            });
+        });
+    }
+
     render() {
         let medicineItems;
         if (this.state.medicines) {
